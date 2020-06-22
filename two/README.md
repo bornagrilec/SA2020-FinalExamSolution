@@ -1,4 +1,4 @@
-## Instructions
+## Instructions (2 points)
 
 Position yourself inside **/src/context** and create file that will have code for the Authentication Context. 
 
