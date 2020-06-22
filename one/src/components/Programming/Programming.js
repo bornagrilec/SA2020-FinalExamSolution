@@ -1,3 +1,5 @@
+// Task One (2 points)
+
 // Add the missing code instead of /*...*/.
 // This component receives a list of programming languages as a prop `progLangs`.
 // `progLangs` is an array of objects.
