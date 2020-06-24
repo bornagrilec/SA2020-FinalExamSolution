@@ -22,7 +22,19 @@ function App() {
   // Also, you must have part of Promise that will execute each time, no matter if Promise is
   // rejected or resolved (In that part you must console.log() the amount of money).
   const asyncFunction = async () => {
-
+    return new Promise((resolve, reject) => {
+      if (amount > 2000) {
+        resolve({ message: 'success' });
+      } else {
+        reject({ message: 'failed' });
+      }
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    }).finally(() => {
+      console.log('Amount of money: ' + amount);
+    });
   }
 
   return (
