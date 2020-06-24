@@ -14,7 +14,7 @@ import ProgLang from '../ProgLang/ProgLang';
 const Programming = props => {
     return (
         <div className="programming-languages-wrapper">
-            {/*...*/}
+            {props.progLangs.map((lang, index) => index < 5 && <ProgLang key={lang.id} name={lang.name} />)}
         </div>
     );
 }
