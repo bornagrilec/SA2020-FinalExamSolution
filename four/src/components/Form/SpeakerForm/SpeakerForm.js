@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { postSpeaker } from '../../../api/speakers';
 import {
     Form,
     FormRow,
@@ -19,14 +21,43 @@ import {
 // speakers page.
 
 const AddSpeaker = (props) => {
+    const history = useHistory();
+    const [speaker, setSpeaker] = useState({
+        title: '',
+        about: '',
+        link: '/',
+    });
+
+    const handleChange = e => {
+        e.preventDefault();
+        setSpeaker({
+            ...speaker,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        postSpeaker(localStorage.getItem('token'), speaker)
+            .then(res => {
+                if (res.speaker) {
+                    history.push('/speakers');
+                } else {
+                    console.log('Error adding user');
+                }
+            })
+    }
+
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <FormRow>
                 <FormLabel htmlFor="title">Title</FormLabel>
                 <FormInput
                     type="text"
                     id="title"
                     name="title"
+                    value={speaker.title}
+                    onChange={handleChange}
                     required />
             </FormRow>
             <FormRow>
@@ -35,6 +66,8 @@ const AddSpeaker = (props) => {
                     type="text"
                     id="about"
                     name="about"
+                    value={speaker.about}
+                    onChange={handleChange}
                     required />
             </FormRow>
             <FormButtonRow>
